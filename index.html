@@ -795,16 +795,23 @@
       quizContainer.style.display = "none";
       resultPage.style.display = "block";
       const resultHeader = document.getElementById("result-header");
-      if (score === quizData.length) {
-        restartBtn.style.animation = "borderGlowGreen 2s ease-in-out infinite";
-        resultPage.style.background = "url('images/wall2.png') no-repeat center center";
-        resultHeader.src = "images/youwin.png";
-        resultHeader.style.transform = "translateX(0)";
-        resultHeader.style.marginTop = "10px";
-        resultHeader.classList.add("victory-animation");
-        finalScoreEl.style.color = "#00ff1a";
-        finalImage.classList.add("raised");
-        finalImage.style.width = (window.innerWidth <= 480) ? "150px" : "190px";
+if (score === quizData.length) {
+  restartBtn.style.animation = "borderGlowGreen 2s ease-in-out infinite";
+  resultPage.style.background = "url('images/wall2.png') no-repeat center center";
+  resultHeader.src = "images/youwin.png";
+  
+  // Si on est sur mobile, remonter l'image de youwin.png
+  if (window.innerWidth <= 480 && resultHeader.src.indexOf("youwin.png") !== -1) {
+    resultHeader.style.transform = "translateY(-20px)";
+  } else {
+    resultHeader.style.transform = "translateX(0)";
+  }
+  
+  resultHeader.style.marginTop = "10px";
+  resultHeader.classList.add("victory-animation");
+  finalScoreEl.style.color = "#00ff1a";
+  finalImage.classList.add("raised");
+  finalImage.style.width = (window.innerWidth <= 480) ? "150px" : "190px";
         
         // --- Ajout de l'overlay GIF de victoire ---
         if (!document.getElementById("confet-overlay")) {
