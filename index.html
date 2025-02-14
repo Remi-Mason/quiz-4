@@ -889,7 +889,21 @@
     }
     
     restartBtn.addEventListener("click", () => { window.location.reload(); });
-	  
+	document.addEventListener("DOMContentLoaded", function() {
+  const audios = document.querySelectorAll("audio");
+  audios.forEach(audio => {
+    const initialVolume = audio.volume;
+    audio.volume = 0;
+    audio.play().then(() => {
+      audio.pause();
+      audio.currentTime = 0;
+      audio.volume = initialVolume;
+    }).catch(error => {
+      console.error("Erreur lors du préchargement audio:", error);
+      audio.volume = initialVolume;
+    });
+  });
+});  
   </script>
 </body>
 </html>
