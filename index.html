@@ -578,6 +578,15 @@
     margin-top: 10px!important; /* Ajustez la valeur selon vos besoins */
   }
 }
+	 @keyframes mobileVictoryAnimation {
+  0%   { transform: translateY(-20px) scale(1) rotate(0deg); }
+  20%  { transform: translateY(-20px) scale(1.1) rotate(3deg); }
+  40%  { transform: translateY(-20px) scale(1) rotate(-3deg); }
+  60%  { transform: translateY(-20px) scale(1.1) rotate(3deg); }
+  80%  { transform: translateY(-20px) scale(1) rotate(-3deg); }
+  90%  { transform: translateY(-20px) scale(1) rotate(0deg); }
+  100% { transform: translateY(-20px) scale(1) rotate(0deg); }
+}
   </style>
 </head>
 <body>
@@ -795,23 +804,23 @@
       quizContainer.style.display = "none";
       resultPage.style.display = "block";
       const resultHeader = document.getElementById("result-header");
-if (score === quizData.length) {
-  restartBtn.style.animation = "borderGlowGreen 2s ease-in-out infinite";
-  resultPage.style.background = "url('images/wall2.png') no-repeat center center";
-  resultHeader.src = "images/youwin.png";
-  
-  // Si on est sur mobile, remonter l'image de youwin.png
-  if (window.innerWidth <= 480 && resultHeader.src.indexOf("youwin.png") !== -1) {
-    resultHeader.style.transform = "translateY(10px)";
-  } else {
-    resultHeader.style.transform = "translateX(0)";
-  }
-  
-  resultHeader.style.marginTop = "10px";
-  resultHeader.classList.add("victory-animation");
-  finalScoreEl.style.color = "#00ff1a";
-  finalImage.classList.add("raised");
-  finalImage.style.width = (window.innerWidth <= 480) ? "150px" : "190px";
+ if (score === quizData.length) {
+    restartBtn.style.animation = "borderGlowGreen 2s ease-in-out infinite";
+    resultPage.style.background = "url('images/wall2.png') no-repeat center center";
+    resultHeader.src = "images/youwin.png";
+    
+    // Pour mobile, appliquer l'animation mobileVictoryAnimation
+    if (window.innerWidth <= 480) {
+      resultHeader.style.animation = "mobileVictoryAnimation 2s ease-in-out infinite";
+    } else {
+      resultHeader.classList.add("victory-animation");
+    }
+    
+    resultHeader.style.marginTop = "10px";
+    resultHeader.style.transform = ""; // Laisser l'animation gérer le transform
+    finalScoreEl.style.color = "#00ff1a";
+    finalImage.classList.add("raised");
+    finalImage.style.width = (window.innerWidth <= 480) ? "150px" : "190px";
         
         // --- Ajout de l'overlay GIF de victoire ---
         if (!document.getElementById("confet-overlay")) {
