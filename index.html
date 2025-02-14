@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -8,7 +9,7 @@
   <meta name="theme-color" content="#0f45d2">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <!-- Préchargement de quelques images critiques -->
-  <!-- Préchargement de quelques images critiques -->
+  <link rel="preload" as="image" href="images/wall.png">
   <link rel="preload" as="image" href="images/wall2.png">
   <link rel="preload" as="image" href="images/correct.png">
   <link rel="preload" as="image" href="images/incorrect.png">
@@ -31,43 +32,44 @@
   
   <style>
     /* Animations */
-    @keyframes victoryAnimation {
-      0% { transform: scale(1) rotate(0deg); }
-      20% { transform: scale(1.1) rotate(3deg); }
-      40% { transform: scale(1) rotate(-3deg); }
-      60% { transform: scale(1.1) rotate(3deg); }
-      80% { transform: scale(1) rotate(-3deg); }
-      90% { transform: scale(1) rotate(0deg); }
-      100% { transform: scale(1) rotate(0deg); }
-    }
-    .victory-animation {
-      animation: victoryAnimation 2s ease-in-out infinite;
-      transform-origin: center;
-    }
-    @keyframes windmillShake {
-      0% { transform: rotate(0deg); }
-      15% { transform: rotate(15deg); }
-      30% { transform: rotate(-15deg); }
-      45% { transform: rotate(10deg); }
-      60% { transform: rotate(-10deg); }
-      75% { transform: rotate(5deg); }
-      90% { transform: rotate(-5deg); }
-      100% { transform: rotate(0deg); }
-    }
-    .windmill-shake {
-      animation: windmillShake 0.8s ease-in-out forwards !important;
-      transform-origin: center;
-    }
-    @keyframes levitateLeft {
-      0%   { transform: translate(40px, -10px); }
-      50%  { transform: translate(40px, -20px); }
-      100% { transform: translate(40px, -10px); }
-    }
-    @keyframes levitateRight {
-      0%   { transform: translate(-40px, -10px); }
-      50%  { transform: translate(-40px, -20px); }
-      100% { transform: translate(-40px, -10px); }
-    }
+	   @keyframes victoryAnimation {
+        0% { transform: scale(1) rotate(0deg); }
+        20% { transform: scale(1.1) rotate(3deg); }
+        40% { transform: scale(1) rotate(-3deg); }
+        60% { transform: scale(1.1) rotate(3deg); }
+        80% { transform: scale(1) rotate(-3deg); }
+        90% { transform: scale(1) rotate(0deg); }
+        100% { transform: scale(1) rotate(0deg); }
+      }
+      .victory-animation {
+        animation: victoryAnimation 2s ease-in-out infinite;
+        transform-origin: center;
+      }
+	  @keyframes windmillShake {
+  0% { transform: rotate(0deg); }
+  15% { transform: rotate(15deg); }
+  30% { transform: rotate(-15deg); }
+  45% { transform: rotate(10deg); }
+  60% { transform: rotate(-10deg); }
+  75% { transform: rotate(5deg); }
+  90% { transform: rotate(-5deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.windmill-shake {
+  animation: windmillShake 0.8s ease-in-out forwards !important;
+  transform-origin: center;
+}
+	 @keyframes levitateLeft {
+        0%   { transform: translate(40px, -10px); }
+        50%  { transform: translate(40px, -20px); } /* monte de 10px */
+        100% { transform: translate(40px, -10px); }
+      }
+      @keyframes levitateRight {
+        0%   { transform: translate(-40px, -10px); }
+        50%  { transform: translate(-40px, -20px); } /* monte de 10px */
+        100% { transform: translate(-40px, -10px); }
+      }
     @keyframes shake {
       0% { transform: translate(0, 0); }
       10% { transform: translate(-10px, -10px); }
@@ -124,14 +126,17 @@
       width: auto;
     }
     /* Pour centrer l'image décorative */
-    .pikachu {
-      display: block;
-      margin: 20px auto;
-      transform: translateY(-15px)!important;
-      width: 270px !important;
-      height: 192px !important;
-      border: 3px solid black;
-    }
+
+.pikachu {
+  display: block;
+  margin: 20px auto;
+  transform: translateY(-15px)!important;
+  width: 270px !important;
+  height: 192px !important;
+  border: 3px solid black;
+
+
+}
     /* Centrage général des images de résultat */
     #result-header {
       display: block;
@@ -310,11 +315,12 @@
       justify-content: center;
     }
     .correct-decoration { width: 60px; }
+    /* Pour l'image de bonne réponse, largeur de 80px adaptée aux GIFs */
     .correct-container .result-image.correct {
       animation: popAnimation 0.5s ease-out;
       width: 80px;
       margin-bottom: 20px;
-      margin-top: -10px;
+	  margin-top: -10px;
       z-index: 1;
     }
     .result-image.incorrect {
@@ -358,58 +364,234 @@
       position: relative;
       overflow: visible;
       animation: borderGlow2 2s ease-in-out infinite;
-      z-index: 6; 
+       z-index: 6; 
     }
     #restart-btn:active { transform: scale(0.95); }
-    .incorrect-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .decor-rightX {
-      width: 80px;
-      transform: translate(-30px, 3px) scale(3);
-      z-index: 0;
-      padding: 12px 0px;
-      animation: levitateRightX 1s ease-in-out infinite;
-    }
-    .decor-leftX {
-      width: 80px;
-      transform: translate(30px, 3px) scale(1.5);
-      z-index: 0;
-      padding: 12px 0px;
-      animation: levitateLeftX 1s ease-in-out infinite;
-    }
-    .decor-right {
-      width: 60px;
-      transform: translate(-40px, 0px);
-      z-index: 0;
-      padding: 12px 0px;
-      animation: levitateRight 1s ease-in-out infinite;
-    }
-    .decor-left {
-      width: 60px;
-      transform: translate(40px, 0px);
-      z-index: 0;
-      padding: 12px 0px;
-      animation: levitateLeft 1s ease-in-out infinite;
-    }
-    @keyframes levitateLeftX {
-      0%   { transform: translate(40px, -13px); }
-      50%  { transform: translate(40px, 3px); }
-      100% { transform: translate(40px, -13px); }
-    }
-    @keyframes levitateRightX {
-      0%   { transform: translate(-40px, -13px); }
-      50%  { transform: translate(-40px, 3px); }
-      100% { transform: translate(-40px, -13px); }
-    }
-    .centipod {
-      display: block;
-      margin: 0 auto;
-    }
-    /* (Media queries et ajustements supplémentaires) */
-    /* ... */
+	 .incorrect-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+ .decor-rightX {
+        width: 80px;
+        transform: translate(-30px, 3px) scale(3);
+        z-index: 0;
+        padding: 12px 0px;
+		 animation: levitateRightX 1s ease-in-out infinite;
+      }
+      .decor-leftX {
+        width: 80px;
+        transform: translate(30px, 3px) scale(1.5);
+        z-index: 0;
+        padding: 12px 0px;
+		 animation: levitateLeftX 1s ease-in-out infinite;
+      }
+	  .decor-right {
+  width: 60px;
+  transform: translate(-40px, 0px);
+  z-index: 0;
+  padding: 12px 0px;
+  animation: levitateRight 1s ease-in-out infinite;
+}
+.decor-left {
+  width: 60px;
+  transform: translate(40px, 0px);
+  z-index: 0;
+  padding: 12px 0px;
+  animation: levitateLeft 1s ease-in-out infinite;
+
+}
+@keyframes levitateLeftX {
+  0%   { transform: translate(40px, -13px); }
+  50%  { transform: translate(40px, 3px); }
+  100% { transform: translate(40px, -13px); }
+}
+@keyframes levitateRightX {
+  0%   { transform: translate(-40px, -13px); }
+  50%  { transform: translate(-40px, 3px); }
+  100% { transform: translate(-40px, -13px); }
+}
+    /* Media Query pour mobile */
+    @media (max-width: 480px) {
+      .container {       
+        width: 360px;
+        max-width: 90%;
+        padding: 30px;
+        padding-top: 30px;
+      }
+      /* Vous pouvez retirer ou adapter cette règle si elle n'est plus nécessaire */
+      #overlay {
+        top: 85px !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+      }
+      #question-text { font-size: 18px; }
+      #final-score { font-size: 20px; }
+      .floating-title { margin: 0 auto 0px; }
+      .pikachu {
+        display: block;
+      }
+      .startu { border-radius: 10px; }
+      .incorrect-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .again {
+        display: block;
+        margin: 0 auto 0px;
+      }
+      @keyframes windmillShake {
+        0% { transform: rotate(0deg); }
+        15% { transform: rotate(15deg); }
+        30% { transform: rotate(-15deg); }
+        45% { transform: rotate(10deg); }
+        60% { transform: rotate(-10deg); }
+        75% { transform: rotate(5deg); }
+        90% { transform: rotate(-5deg); }
+        100% { transform: rotate(0deg); }
+      }
+      .windmill-shake {
+        animation: windmillShake 0.8s ease-in-out forwards;
+        transform-origin: center;
+      }
+      .raised {
+        transform: translateY(-20px);
+        margin-bottom: -10px !important;
+      }
+      @keyframes victoryAnimation {
+        0% { transform: scale(1) rotate(0deg); }
+        20% { transform: scale(1.1) rotate(3deg); }
+        40% { transform: scale(1) rotate(-3deg); }
+        60% { transform: scale(1.1) rotate(3deg); }
+        80% { transform: scale(1) rotate(-3deg); }
+        90% { transform: scale(1) rotate(0deg); }
+        100% { transform: scale(1) rotate(0deg); }
+      }
+      .victory-animation {
+        animation: victoryAnimation 2s ease-in-out infinite;
+        transform-origin: center;
+      }
+      @media (max-width: 480px) {
+        .pikachu {
+            display: block;
+  margin: 10px auto;
+  transform: translateY(-10px)!important;
+  width: 270px !important;
+  height: 192px !important;
+        }
+      }
+      @media (max-width: 480px) {
+        .again {
+          width: 85%;
+          margin: 0 auto;
+          transform: translateX(0px);
+        }
+      }
+      @media (max-width: 480px) {      
+        #result-header {
+          display: block;
+          margin: 0 auto 20px;
+          width: 85%;
+        }
+      }
+      @media (max-width: 480px) {      
+        .decor-right {
+          width: 60px;
+          transform: translate(40px, -5px);
+          z-index: 0;
+          padding: 12px 0px;
+          animation: levitateRight 1s ease-in-out infinite;
+        }
+      }
+      @media (max-width: 480px) {      
+        .decor-left {
+          width: 60px;
+          transform: translate(-40px, -5px);
+          z-index: 0;
+          padding: 12px 0px;
+          animation: levitateLeft 1s ease-in-out infinite;
+        }
+      }
+      @media (max-width: 480px) {      
+        .decor-rightX {
+          width: 80px;
+          transform: translate(-30px, 0px);
+          z-index: 0;
+          padding: 12px 0px;
+        }
+      }
+      @media (max-width: 480px) {      
+        .decor-leftX {
+          width: 80px;
+          transform: translate(30px, 0px);
+          z-index: 0;
+          padding: 12px 0px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .floating-title {
+          margin-top: 0px; /* Ajustez selon le rendu souhaité */
+		  margin-bottom: 20px;
+
+        }
+      }
+ @media (max-width: 480px) {
+ @keyframes levitateLeft {
+        0%   { transform: translate(20px, -10px); }
+        50%  { transform: translate(20px, -20px); } /* monte de 10px */
+        100% { transform: translate(20px, -10px); }
+      }
+      @keyframes levitateRight {
+        0%   { transform: translate(-20px, -10px); }
+        50%  { transform: translate(-20px, -20px); } /* monte de 10px */
+        100% { transform: translate(-20px, -10px); }
+      }
+}
+ @media (max-width: 480px) {
+@keyframes levitateLeftX {
+  0%   { transform: translate(20px, -13px); }
+  50%  { transform: translate(20px, 3px); }
+  100% { transform: translate(20px, -13px); }
+}
+ @media (max-width: 480px) {
+@keyframes levitateRightX {
+  0%   { transform: translate(-20px, -13px); }
+  50%  { transform: translate(-20px, 3px); }
+  100% { transform: translate(-20px, -13px); }
+}
+}
+.centipod {
+  display: block;
+  margin: 0 auto;
+}
+@media (max-width: 480px) {
+  #question-text { font-size: 20px; }
+}
+.lose1-scale {
+  transform: scale(1.2) !important;
+}
+@media (max-width: 480px) {
+  #mute-btn {
+    margin-top: 10px!important; /* Ajustez la valeur selon vos besoins */
+  }
+}
+	 @keyframes mobileVictoryAnimation {
+  0%   { transform: translateY(-20px) scale(1) rotate(0deg); }
+  20%  { transform: translateY(-20px) scale(1.1) rotate(3deg); }
+  40%  { transform: translateY(-20px) scale(1) rotate(-3deg); }
+  60%  { transform: translateY(-20px) scale(1.1) rotate(3deg); }
+  80%  { transform: translateY(-20px) scale(1) rotate(-3deg); }
+  90%  { transform: translateY(-20px) scale(1) rotate(0deg); }
+  100% { transform: translateY(-20px) scale(1) rotate(0deg); }
+}
+	 @media (max-width: 480px) {
+  #result-page {
+    padding-top: 40px; /* Ajustez la valeur selon vos besoins */
+  }
+}
   </style>
 </head>
 <body>
@@ -428,7 +610,9 @@
     <img src="images/titre.png" alt="quiz ssiap1" class="floating-title">
     <!-- Image décorative centrée -->
     <img src="images/decor1.gif" alt="pik" class="pikachu" style="z-index: 3;">
-    <!-- Bouton mute et bouton start -->
+    <!-- Image GBC en tant qu'image normale (non overlay) -->
+
+    <!-- Bouton mute et bouton start… -->
     <img id="mute-btn" src="images/mute-off.gif" alt="Son activé" style="cursor: pointer; width: 30px; height: 25px; margin: -10px auto -2px;">
     <button id="start-btn"><img src="images/start.png" style="margin-bottom: -15px; width: 140px"></button>
   </div>
@@ -453,9 +637,20 @@
   </div>
   
   <script>
-    // DONNÉES DU QUIZ
+  document.addEventListener("DOMContentLoaded", function() {
+  var decorImage = document.querySelector('.pikachu');
+  if (decorImage) {
+    decorImage.src = "images/decor1.gif";
+    decorImage.style.width = "235px";
+    setTimeout(function(){
+       decorImage.src = "images/decor2.gif";
+       decorImage.style.width = "235px";
+    }, 2200);
+  }
+});
+    // Données du quiz
     const quizData = [
-      {
+            {
         question: "Sur quel feu peut-on utiliser un extincteur à eau pulvérisée avec additif (A.F.F.F.) ?",
         options: ["Classe A", "Classe B", "Classe C", "Classe D", "Classe F", "aucune des réponses précédentes"],
         correctAnswers: ["Classe A", "Classe B"]
@@ -466,7 +661,7 @@
     let score = 0;
     let isMuted = false;
     
-    // RÉFÉRENCES AUX ÉLÉMENTS
+    // Références aux éléments
     const homeDiv = document.getElementById("home");
     const quizContainer = document.getElementById("quiz-container");
     const resultPage = document.getElementById("result-page");
@@ -487,11 +682,11 @@
     const correctSound = document.getElementById("correct-sound");
     const incorrectSound = document.getElementById("incorrect-sound");
     
-    // FONCTION DE BASCULE MUTE
+    // Fonction de basculement mute
     function muteToggleHandler() {
       isMuted = !isMuted;
       [startSound, correctSound, incorrectSound, checkboxSound,
-       document.getElementById("incorrect-sound2"),
+        document.getElementById("incorrect-sound2"),
        document.getElementById("perfect-sound"),
        document.getElementById("imperfect-sound")
       ].forEach(audio => { audio.muted = isMuted; });
@@ -504,35 +699,35 @@
       }
     }
     muteBtn.addEventListener("click", muteToggleHandler);
-    
-    document.addEventListener("DOMContentLoaded", function() {
-      var muteImg = document.getElementById("mute-btn");
-      if (muteImg && muteImg.src.indexOf(".gif") !== -1) {
-        var newMuteImg = muteImg.cloneNode(true);
-        newMuteImg.src = newMuteImg.src.split('?')[0] + '?t=' + new Date().getTime();
-        muteImg.parentNode.replaceChild(newMuteImg, muteImg);
-        newMuteImg.addEventListener("click", muteToggleHandler);
-      }
-    });
-    
-    // DÉMARRAGE DU QUIZ (initialise l'audio via le clic sur Start)
- startBtn.addEventListener("click", async () => {
-  try {
-    await startSound.play();
-  } catch (error) {
-    console.error("Erreur lors de la lecture du startSound:", error);
+	document.addEventListener("DOMContentLoaded", function() {
+  var muteImg = document.getElementById("mute-btn");
+  if (muteImg && muteImg.src.indexOf(".gif") !== -1) {
+    var newMuteImg = muteImg.cloneNode(true);
+    newMuteImg.src = newMuteImg.src.split('?')[0] + '?t=' + new Date().getTime();
+    muteImg.parentNode.replaceChild(newMuteImg, muteImg);
+    newMuteImg.addEventListener("click", muteToggleHandler);
   }
-  // Passe à la page du quiz après un délai
-  setTimeout(() => {
-    homeDiv.style.display = "none";
-    quizContainer.style.display = "block";
-    currentQuestion = 0;
-    score = 0;
-    showQuestion();
-  }, 1500);
 });
     
-    // AFFICHAGE DE LA QUESTION
+    // Démarrage du quiz
+    startBtn.addEventListener("click", () => {
+      if (screen.orientation && screen.orientation.lock) {
+        screen.orientation.lock("portrait").catch(error => { console.log("Le verrouillage de l'orientation a échoué :", error); });
+      }
+      startSound.play();
+      startBtn.style.boxShadow = "0 0 20px rgba(0, 255, 0, 1)";
+      startBtn.style.animation = "blink 0.3s infinite ease-in-out";
+      setTimeout(() => {
+        startBtn.style.animation = "glow-green 1.5s infinite ease-in-out";
+        homeDiv.style.display = "none";
+        quizContainer.style.display = "block";
+        currentQuestion = 0;
+        score = 0;
+        showQuestion();
+      }, 1500);
+    });
+    
+    // Affichage de la question
     function showQuestion() {
       resultDiv.innerHTML = "";
       const data = quizData[currentQuestion];
@@ -547,10 +742,7 @@
         checkbox.value = option;
         checkbox.name = "option";
         checkbox.id = `option_${index}`;
-        checkbox.addEventListener("click", () => { 
-          checkboxSound.currentTime = 0; 
-          checkboxSound.play(); 
-        });
+        checkbox.addEventListener("click", () => { checkboxSound.currentTime = 0; checkboxSound.play(); });
         const label = document.createElement("label");
         label.htmlFor = `option_${index}`;
         label.textContent = option;
@@ -560,7 +752,7 @@
       });
     }
     
-    // COMPARAISON DES TABLEAUX
+    // Comparaison des tableaux
     function arraysEqual(a, b) {
       if (a.length !== b.length) return false;
       const sortedA = a.slice().sort();
@@ -572,10 +764,7 @@
     validateBtn.addEventListener("click", () => {
       const data = quizData[currentQuestion];
       const selected = Array.from(document.querySelectorAll('input[name="option"]:checked')).map(el => el.value);
-      if (selected.length === 0) { 
-        alert("Veuillez sélectionner au moins une réponse"); 
-        return; 
-      }
+      if (selected.length === 0) { alert("Veuillez sélectionner au moins une réponse"); return; }
       const isCorrect = arraysEqual(selected, data.correctAnswers);
       validateBtn.style.display = "none";
       if (isCorrect) {
@@ -615,30 +804,36 @@
       }, delayTime);
     });
     
-    // AFFICHAGE DE LA PAGE FINALE
+    // Affichage de la page finale
     function showResultPage() {
       quizContainer.style.display = "none";
       resultPage.style.display = "block";
       const resultHeader = document.getElementById("result-header");
-      if (score === quizData.length) {
-        restartBtn.style.animation = "borderGlowGreen 2s ease-in-out infinite";
-        resultPage.style.background = "url('images/wall2.png') no-repeat center center";
-        resultHeader.src = "images/youwin.png";
-        if (window.innerWidth <= 480) {
-          resultHeader.style.animation = "mobileVictoryAnimation 2s ease-in-out infinite";
-        } else {
-          resultHeader.classList.add("victory-animation");
-        }
-        resultHeader.style.marginTop = "10px";
-        resultHeader.style.transform = "";
-        finalScoreEl.style.color = "#00ff1a";
-        finalImage.classList.add("raised");
-        finalImage.style.width = (window.innerWidth <= 480) ? "150px" : "190px";
+ if (score === quizData.length) {
+    restartBtn.style.animation = "borderGlowGreen 2s ease-in-out infinite";
+    resultPage.style.background = "url('images/wall2.png') no-repeat center center";
+    resultHeader.src = "images/youwin.png";
+    
+    // Pour mobile, appliquer l'animation mobileVictoryAnimation
+    if (window.innerWidth <= 480) {
+      resultHeader.style.animation = "mobileVictoryAnimation 2s ease-in-out infinite";
+    } else {
+      resultHeader.classList.add("victory-animation");
+    }
+    
+    resultHeader.style.marginTop = "10px";
+    resultHeader.style.transform = ""; // Laisser l'animation gérer le transform
+    finalScoreEl.style.color = "#00ff1a";
+    finalImage.classList.add("raised");
+    finalImage.style.width = (window.innerWidth <= 480) ? "150px" : "190px";
+        
+        // --- Ajout de l'overlay GIF de victoire ---
         if (!document.getElementById("confet-overlay")) {
           let overlay = document.createElement("img");
           overlay.id = "confet-overlay";
           overlay.src = "images/confet.gif"; 
           overlay.alt = "Overlay de victoire";
+          // Positionner l'overlay pour qu'il couvre tout le container
           overlay.style.position = "absolute";
           overlay.style.top = "0";
           overlay.style.left = "0";
@@ -668,21 +863,22 @@
       resultPage.style.backgroundSize = "cover";
       resultPage.style.backgroundPosition = "center";
       finalScoreEl.textContent = `Score : ${score} sur ${quizData.length}`;
-      if (score === quizData.length) {
-        finalImage.src = "images/perfect.gif";
-        finalImage.classList.remove("lose1-scale");
-        setTimeout(() => {
-          finalImage.src = "images/perfect2.gif";
-        }, 2200);
-      } else {
-        if (Math.random() < 0.5) {
-          finalImage.src = "images/lose1.gif";
-          finalImage.classList.add("lose1-scale");
-        } else {
-          finalImage.src = "images/lose2.gif";
-          finalImage.classList.remove("lose1-scale");
-        }
-      }
+   if (score === quizData.length) {
+  finalImage.src = "images/perfect.gif";
+  finalImage.classList.remove("lose1-scale");
+  // Après 2 secondes, on passe à perfect2.gif
+  setTimeout(() => {
+    finalImage.src = "images/perfect2.gif";
+  }, 2200); // Ajuste le délai (2000ms) selon ton besoin
+} else {
+  if (Math.random() < 0.5) {
+    finalImage.src = "images/lose1.gif";
+    finalImage.classList.add("lose1-scale");
+  } else {
+    finalImage.src = "images/lose2.gif";
+    finalImage.classList.remove("lose1-scale");
+  }
+}
       if (score === quizData.length) {
         document.getElementById("perfect-sound").currentTime = 0;
         document.getElementById("perfect-sound").play();
@@ -694,16 +890,20 @@
     
     restartBtn.addEventListener("click", () => { window.location.reload(); });
 	document.addEventListener("DOMContentLoaded", function() {
-  const decorImage = document.querySelector('.pikachu');
-  if (decorImage) {
-    // Affiche d'abord decor1.gif
-    decorImage.src = "images/decor1.gif";
-    // Après 2 secondes, change pour decor2.gif
-    setTimeout(() => {
-      decorImage.src = "images/decor2.gif";
-    }, 2000);
-  }
-});
+  const audios = document.querySelectorAll("audio");
+  audios.forEach(audio => {
+    const initialVolume = audio.volume;
+    audio.volume = 0;
+    audio.play().then(() => {
+      audio.pause();
+      audio.currentTime = 0;
+      audio.volume = initialVolume;
+    }).catch(error => {
+      console.error("Erreur lors du préchargement audio:", error);
+      audio.volume = initialVolume;
+    });
+  });
+});  
   </script>
 </body>
 </html>
