@@ -863,6 +863,8 @@
   finalImage.src = "images/perfect.gif";
 	    finalImage.style.setProperty("width", "150px", "important");
 	    finalImage.style.transform =  "translateX(10px)";
+	    if (window.innerWidth <= 480) {
+    finalImage.style.marginTop = "-20px"; // ajustez la valeur selon vos besoins
 } else {
   finalImage.src = "images/lose1.gif";
   setTimeout(() => {
