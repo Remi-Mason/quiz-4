@@ -864,13 +864,11 @@
 	    finalImage.style.setProperty("width", "150px", "important");
 	    finalImage.style.transform =  "translateX(10px)";
 	    if (window.innerWidth <= 480) {
-    finalImage.style.marginTop = "-20px"; // ajustez la valeur selon vos besoins
+    finalImage.style.marginTop = "-20px"!important; // ajustez la valeur selon vos besoins
 	    }
 } else {
-  finalImage.src = "images/lose1.gif";
-  setTimeout(() => {
-    finalImage.src = "images/lose2.gif";
-  }, 1000);
+  // Choix aléatoire entre lose1.gif et lose2.gif
+  finalImage.src = (Math.random() < 0.5) ? "images/lose1.gif" : "images/lose2.gif";
 }
       if (score === quizData.length) {
         document.getElementById("perfect-sound").currentTime = 0;
