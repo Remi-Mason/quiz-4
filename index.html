@@ -867,6 +867,8 @@
       finalScoreEl.textContent = `Score : ${score} sur ${quizData.length}`;
 if (score === quizData.length) {
   finalImage.src = "images/perfect.gif";
+  finalImage.style.transform =  "translateX(10px)";
+  finalImage.style.setProperty("width", "150px", "important");
   // Ajouter la classe spécifique pour perfect.gif
   finalImage.classList.add("perfect-only");
   // Pour les mobiles, la transformation sera appliquée via CSS
