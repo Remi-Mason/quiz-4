@@ -863,12 +863,19 @@
       resultPage.style.backgroundSize = "cover";
       resultPage.style.backgroundPosition = "center";
       finalScoreEl.textContent = `Score : ${score} sur ${quizData.length}`;
-   if (score === quizData.length) {
+if (score === quizData.length) {
   finalImage.src = "images/perfect.gif";
-  // Après 2 secondes, on passe à perfect2.gif
-setTimeout(() => {
-  finalImage.src = "images/perfect2.gif";
-}, 2400);
+  finalImage.classList.remove("lose1-scale");
+  setTimeout(() => {
+    finalImage.style.display = "none"; // Masquer l'image
+    // Forcer un reflow
+    void finalImage.offsetWidth;
+    finalImage.src = "images/perfect2.gif?t=" + new Date().getTime();
+    setTimeout(() => {
+      finalImage.style.display = "block"; // Réafficher l'image une fois le nouveau GIF chargé
+    }, 50);
+  }, 2400);
+}
 } else {
   if (Math.random() < 0.5) {
     finalImage.src = "images/lose1.gif";
