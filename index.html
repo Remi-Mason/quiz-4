@@ -588,6 +588,11 @@
     padding-top: 40px; /* Ajustez la valeur selon vos besoins */
   }
 }
+	 @media (max-width: 480px) {
+  .perfect-only {
+    transform: translateX(10px) translateY(-20px) !important;
+  }
+}
   </style>
 </head>
 <body>
@@ -862,10 +867,10 @@
 if (score === quizData.length) {
   finalImage.src = "images/perfect.gif";
   finalImage.style.setProperty("width", "150px", "important");
-  finalImage.style.transform = "translateX(10px)";
-  if (window.innerWidth <= 480) {
-    finalImage.style.setProperty("margin-top", "-20px", "important");
-  }
+  // Ajouter la classe spécifique pour perfect.gif
+  finalImage.classList.add("perfect-only");
+  // Pour les mobiles, la transformation sera appliquée via CSS
+  // (pas besoin de transformer ici en JS)
 } else {
   // Choix aléatoire entre lose1.gif et lose2.gif
   finalImage.src = (Math.random() < 0.5) ? "images/lose1.gif" : "images/lose2.gif";
