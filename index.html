@@ -864,6 +864,7 @@
       finalScoreEl.textContent = `Score : ${score} sur ${quizData.length}`;
   if (score === quizData.length) {
   finalImage.src = "images/perfect.gif";
+	    finalImage.style.setProperty("width", "150px", "important");
 } else {
   finalImage.src = "images/lose1.gif";
   setTimeout(() => {
