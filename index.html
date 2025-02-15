@@ -859,25 +859,25 @@
       resultPage.style.backgroundSize = "cover";
       resultPage.style.backgroundPosition = "center";
       finalScoreEl.textContent = `Score : ${score} sur ${quizData.length}`;
-  if (score === quizData.length) {
+if (score === quizData.length) {
   finalImage.src = "images/perfect.gif";
-	    finalImage.style.setProperty("width", "150px", "important");
-	    finalImage.style.transform =  "translateX(10px)";
-	    if (window.innerWidth <= 480) {
-    finalImage.style.marginTop = "-20px"!important; // ajustez la valeur selon vos besoins
-	    }
+  finalImage.style.setProperty("width", "150px", "important");
+  finalImage.style.transform = "translateX(10px)";
+  if (window.innerWidth <= 480) {
+    finalImage.style.setProperty("margin-top", "-20px", "important");
+  }
 } else {
   // Choix aléatoire entre lose1.gif et lose2.gif
   finalImage.src = (Math.random() < 0.5) ? "images/lose1.gif" : "images/lose2.gif";
 }
-      if (score === quizData.length) {
-        document.getElementById("perfect-sound").currentTime = 0;
-        document.getElementById("perfect-sound").play();
-      } else {
-        document.getElementById("imperfect-sound").currentTime = 0;
-        document.getElementById("imperfect-sound").play();
-      }
-    }
+
+if (score === quizData.length) {
+  document.getElementById("perfect-sound").currentTime = 0;
+  document.getElementById("perfect-sound").play();
+} else {
+  document.getElementById("imperfect-sound").currentTime = 0;
+  document.getElementById("imperfect-sound").play();
+}
     
     restartBtn.addEventListener("click", () => { window.location.reload(); });
 	document.addEventListener("DOMContentLoaded", function() {
