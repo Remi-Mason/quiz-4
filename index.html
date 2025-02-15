@@ -867,9 +867,9 @@
   finalImage.src = "images/perfect.gif";
   finalImage.classList.remove("lose1-scale");
   // Après 2 secondes, on passe à perfect2.gif
-  setTimeout(() => {
-    finalImage.src = "images/perfect2.gif";
-  }, 2500); // Ajuste le délai (2000ms) selon ton besoin
+setTimeout(() => {
+  finalImage.src = "images/perfect2.gif?t=" + new Date().getTime();
+}, 2500);
 } else {
   if (Math.random() < 0.5) {
     finalImage.src = "images/lose1.gif";
